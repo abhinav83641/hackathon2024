@@ -7,13 +7,22 @@ const utils = require('../utils')
 const router = express.Router()
 
 // add category
-
-
-
-
+router.post('/add', (request, response) => {
+  const { title, description } = request.body
+  const statement = `insert into categories ( title, description) values (?,?)`
+   db.pool.execute(statement, [title, description], (error, addcategory) => {
+    response.send(utils.createResult(error,addcategory))
+  })
+})
 
 // show category
 
+router.get('/showcategories', (request, response) => {
+    const statement = `select id, title, description from categories;`
+    db.pool.query(statement, (error, categories) => {
+      response.send(utils.createResult(error, categories))
+    })
+  })
 
 
 
@@ -21,26 +30,3 @@ module.exports = router
 
 
 
-// router.get('/', (request, response) => {
-  //   const statement = `select id, title, details, image from category;`
-  //   db.pool.query(statement, (error, categories) => {
-  //     response.send(utils.createResult(error, categories))
-  //   })
-  // })
-  
-  // // use the middleware (upload) to upload a single 'icon'
-  // router.post('/', upload.single('icon'), (request, response) => {
-  //   const { title, details } = request.body
-  
-  //   // get the  name of uploaded file
-  //   const fileName = request.file.filename
-  
-  //   const statement = `insert into category (title, details, image) values (?, ?, ?)`
-  //   db.pool.execute(
-  //     statement,
-  //     [title, details, fileName],
-  //     (error, categories) => {
-  //       response.send(utils.createResult(error, categories))
-  //     }
-  //   )
-  // })
