@@ -50,7 +50,7 @@ router.delete('/delete',(request,response)=>{
 //view all blog
 
 router.get('/viewall',(request,response)=>{
-    const statement = `select blogs.id,blogs.title,categories.title as 'Category',users.created_time as 'Date',users.full_name as 'Author' from blogs,users,categories where blogs.user_id = users.id and blogs.category_id = categories.id; `
+    const statement = `select blogs.id ID,blogs.title TITLE,categories.title TITLE1 ,users.created_time TIME1,users.full_name NAME1  from blogs,users,categories where blogs.user_id = users.id and blogs.category_id = categories.id; `
     db.pool.execute(statement,(error,result)=>{
         response.send(utils.createResult(error,result))
     })

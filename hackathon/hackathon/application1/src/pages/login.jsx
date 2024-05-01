@@ -1,13 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom'
 import {useState} from 'react'
 import { login } from '../services/user'
-// import { toast } from 'react-toastify'
+import { useDispatch } from 'react-redux'
+import { loginAction } from '../features/userSlice'
+
 
 function LoginUser() {
     const [email, setEmail] = useState('')
     const [password,setPassword]= useState('')
     
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     
     const onLogin = async () => {
         // client side validation
@@ -21,6 +24,7 @@ function LoginUser() {
          
             if (result['status'] === 'success') {
             
+                dispatch(loginAction())
                 navigate('/home')
             } else {
               alert('invalid email or password')

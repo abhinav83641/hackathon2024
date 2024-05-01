@@ -1,22 +1,16 @@
-
+import { useDispatch} from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { logoutAction } from '../features/userSlice'
 
 function Navbar() {
-  // read the cart state
-
-
+ 
   // get the navigate object
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
  
 
   const onLogout = () => {
-    // clear the session storage
-   // sessionStorage.removeItem('token')
-    //sessionStorage.removeItem('name')
-
-    // set the login status to false
+   
     dispatch(logoutAction())
 
     // navigate to login page
@@ -24,13 +18,14 @@ function Navbar() {
   }
 
   return (
+ 
     <nav
       data-bs-theme='dark'
       className='navbar bg-dark navbar-expand-lg bg-body-tertiary'
     >
       <div className='container-fluid'>
         <a className='navbar-brand' href='#'>
-          Airbnb
+          MY BLOGS
         </a>
 
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
@@ -40,18 +35,28 @@ function Navbar() {
                 Home
               </Link>
             </li>
-
             <li className='nav-item'>
-              <Link to='/add-property' className='nav-link'>
-                Add
+              <Link to='/categorylist' className='nav-link'>
+                Category
               </Link>
             </li>
-
             <li className='nav-item'>
-              <Link to='/cart' className='nav-link'>
-                Cart ({cart.items.length})
+              <Link to='/bloglist' className='nav-link'>
+                Blog List
               </Link>
             </li>
+            <li className='nav-item'>
+              <Link to='/createblog' className='nav-link'>
+                Create Blog
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link to='/editdelete' className='nav-link'>
+                Edit/Delete Blog
+              </Link>
+            </li>
+           
+            
 
             <li className='nav-item'>
               <a className='nav-link' onClick={onLogout}>

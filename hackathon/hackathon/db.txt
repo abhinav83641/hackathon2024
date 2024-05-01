@@ -1,0 +1,31 @@
+create table categories (
+    id integer primary key auto_increment,
+    title varchar(30),
+    description varchar(50),
+    x varchar(100)
+);
+
+
+create table users(
+    id integer primary key auto_increment,
+    full_name varchar(50),
+    email varchar(30),
+    password varchar(100),
+    phone_no varchar(10), 
+    created_time DATETIME default CURRENT_TIMESTAMP,
+    y varchar(100)
+);
+
+
+create table blogs(
+    id integer primary key auto_increment,
+    title varchar(20),
+    contents varchar(100),
+    created_time DATETIME default CURRENT_TIMESTAMP,
+    user_id integer, 
+    category_id integer, 
+    z varchar(100),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
